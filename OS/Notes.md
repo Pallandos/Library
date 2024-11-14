@@ -8,6 +8,10 @@
     - [Hiérarchie des processus UNIX](#hiérarchie-des-processus-unix)
     - [Contexte d'un processus](#contexte-dun-processus)
     - [Création du processus](#création-du-processus)
+  - [Concurrence et Exclusion mutuelle](#concurrence-et-exclusion-mutuelle)
+    - [Pourquoi c'est important?](#pourquoi-cest-important)
+    - [L'attente active](#lattente-active)
+      - [Le TSL](#le-tsl)
 
 ## Intro
 
@@ -108,3 +112,84 @@ A voir :
 On duplique un processus avec la fonction `fork()`.
 
 On peut recouvrir un processus avec la commande `exec` *(ça sert à quoi??)*.
+
+## Concurrence et Exclusion mutuelle
+
+Inhérent à toute programmation en multitâche.
+
+### Pourquoi c'est important?
+
+Objectifs :
+
+- limiter l'accès aux ressources
+- limiter à un seul user/processus
+
+Une *section critique* est une zone/donnée qui présente des risques d'accès multiples et qui devra être protégée. Cela demande donc un système d'exclusion mutuelle.
+
+4 conditions à satisfaire :
+
+- 2 processus ne peuvent être en même temps dans la même zone critique
+- aucune hypothèse sur les vitesses relatives et le nombre de coeurs
+- aucun processus suspendu en dehors d'une section critique ne doit bloquer les autres
+- aucun processus ne dois attendre trop longtemps
+
+### L'attente active
+
+Première solution pour pallier au problème (mais moins efficace que l'attente passive)
+
+Plusieurs solutions sont imaginables mais non fiables:
+
+- masquage des interruptions : trop dangereux de supprimer les interruptions
+- par verrouillages/clés : vulnérable entre la lecture du verrou et sa modification
+- alternance mode1 (clé d'accès avec un destinataire forcé) : implique la connaissance du nombre de processus, inégalitaire en terme de temps d'execution (un processus lent sera favorisé)
+
+#### Le TSL
+
+TSL ou *Test and Set Lock* est une instruction atomique qui implémente l'exclusion mutuelle ([Wikipedia](https://fr.wikipedia.org/wiki/Test-and-set)).
+
+On sépare la lecture et l'écriture du verrou, ce qui permet d'empêcher les accès concurrents.
+
+Code en C qui implémente l'opération atomique :
+
+```.c
+
+#define LOCKED 1
+
+int test_and_set(int* lockPtr) {
+    int oldValue;
+
+    // -- Start of atomic segment --
+    // This should be interpreted as pseudocode for illustrative purposes only.
+    // Traditional compilation of this code will not guarantee atomicity, the
+    // use of shared memory (i.e., non-cached values), protection from compiler
+    // optimizations, or other required properties.
+    oldValue = *lockPtr;
+    *lockPtr = LOCKED;
+    // -- End of atomic segment --
+
+    return oldValue;
+}
+
+```
+
+Implémentation C du spin-lock associé au mode atomique ci dessus :
+
+```.c
+
+volatile int lock = 0;
+
+void critical() {
+    // Spin lock: loop forever until we get the lock; we know the lock was
+    // successfully obtained after exiting this while loop because the 
+    // test_and_set() function locks the lock and returns the previous lock 
+    // value. If the previous lock value was 1 then the lock was **already**
+    // locked by another thread or process. Once the previous lock value
+    // was 0, however, then it indicates the lock was **not** locked before we
+    // locked it, but now it **is** locked because we locked it, indicating
+    // we own the lock.
+    while (test_and_set(&lock) == 1);  
+    critical section  // only one process can be in this section at a time
+    lock = 0;  // release lock when finished with the critical section
+}
+
+```
