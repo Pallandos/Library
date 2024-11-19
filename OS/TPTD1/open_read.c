@@ -32,7 +32,7 @@ main () {
             char bufferp[4];
             read(fd, bufferp, 4);
             printf("buffer père: %s\n", bufferp);
-            write(fd, "père", 4);
+            write(fd, "pere", 4);
 
             break;
     }
