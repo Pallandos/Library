@@ -34,18 +34,18 @@ La généralisation donne :
 
 PN(){
     for (int j, j<N j++){
-        envoi(Pj,"rdv");
+        P(Pj,"rdv");
     }
     for (int j, j<N, j++){
-        reception(Pj,"rdv");
+        V(Pj,"rdv");
     }
 
     RDV()
 }
 
 Pi(){
-    reception(PN,"rdv");
-    envoi(PN,"rdv");
+    V(Pi,"rdv");
+    P(Pj,"rdv");
 
     RDV()
 }
