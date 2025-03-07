@@ -99,6 +99,126 @@ Il existe 2 types de *storage* en **HTML5** :
 
 ## CSS et BootStrap
 
+Séparer HTML et CSS rends le code plus facile à maintenir : 
+
+- HTML : la structure
+- CSS : l'aspect
+
+On peut donc appliquer un même style à plusieurs éléments sans recopier de code (**DRY**), ou changer un style sans toucher au HTML.
+
+### Où placer son CSS
+
+Il existe 3 possibilités pour écrire du CSS : 
+
+- *Inline* : (avec un attribut `style`)
+    - rapide à écrire
+    - peu lisible, pollue le code
+- *Interne* : (balise `<style>` dans `<head>`)
+    - centralise le style de la page courante
+    - si plusieurs page on dupplique du code
+- *Externe* : (dans un `style.css`)
+    - fichier séparé
+    - facilité de lecture, centralisé 
+
+### Les sélecteurs
+
+Un sélecteur est un élement qui permet de délimiter à quels blocs de code seront appliqués le style courant.
+
+> Les moteurs de rendu parcourent le DOM pour appliquer les styles. Dans un souci de performances, éviter les sélecteurs trop complexes
+
+#### Sélecteurs d'éléments
+
+Sélectionne tous les éléments d’un type donné (ex. `p`, `h1`, etc.) :
+
+```css
+p {
+   color: blue;
+}
+```
+
+#### Sélecteurs de classe
+
+Sélectionne tous les éléments ayant l’attribut `class="..."` correspondant.
+
+```css
+.ma-classe {
+  background-color: #f5f5f5;
+}
+```
+
+Dans le html : 
+
+```html
+<div class="ma-classe">Contenu</div>
+```
+
+#### Sélecteurs d'ID
+
+Sélectionne un élément portant l’attribut `id="..."` censé être unique dans la page :
+
+```css
+#mon-id {
+  border: 1px solid #000;
+}
+```
+
+Dans le html :
+
+
+```html
+<section id="mon-id">Contenu</section>
+```
+
+#### Sélecteurs d'attributs
+
+Permettent de cibler un élément selon un attribut ou une valeur.
+
+```css
+input[type="text"] {
+  border: 1px solid grey;
+}
+
+img[alt] {
+  /* s'applique à tout <img> ayant un alt */
+}
+
+```
+
+#### Pseudos classes et pseudos éléments
+
+- Pseudo-classes (`:hover`, `:focus`, `:active`, `:nth-child()`, etc.) indiquent un état : survol de souris, focus clavier, ordre de l’élément…
+- Pseudo-éléments (`::before`, `::after`, `::first-line`, etc.) ciblent une portion virtuelle ou générée, ex. du contenu ajouté avant ou après un élément.
+
+Les pseudos classes permettent de faire du contenu réactif sans utiliser de javascript.
+
+```css
+
+a:hover {
+  text-decoration: underline;
+}
+
+p::first-line {
+  font-weight: bold;
+}
+
+```
+
+Lorsque plusieurs règles ciblent le même élément, la spécificité détermine quelle règle prévaut.
+
+- Sélecteur ID (`#quelquechose`) a une spécificité plus élevée.
+- Sélecteur classe (`.machin`), pseudo-classes (`:hover`) et attributs (`[type="text"]`) ont une spécificité moyenne.
+- Sélecteur d’élément (`p`, `h1`) a une spécificité plus faible.
+
+### Media queries
+
+Les media queries permettent de connaître les spécifités de l'appareil de l'utilisateur, pour adpater l'affichage du contenu. On code donc un seul site, mais qui s'adapte aux écrans des users.
+
+### Bootstrap
+
+Bootstrap est un *framework* qui propose des templates de sites et de style préconçus d'une GRANDE BEAUTE. Cela permet de créer très rapidement des sites beaux, mais avec l'inconvénient d'être dépendant et d'avoir des feuilles de style surchargées. 
+
+Bootstrap vient avec un système de *grids* avec des classes qui gèrent le *reponsive design*
+
 ## Javascript
 
 javascript a été une révolution : pn sort du HTML classique et statique. On peut enfin avoir des pages dynamiques qui répondent au user.
