@@ -2,6 +2,35 @@
 
 Jean CAYLUS
 
+- [Dev WEB](#dev-web)
+  - [HTML](#html)
+    - [Elements sémantiques](#elements-sémantiques)
+      - [Structure](#structure)
+      - [Médias](#médias)
+      - [Divers éléments](#divers-éléments)
+    - [Stockage](#stockage)
+  - [CSS et BootStrap](#css-et-bootstrap)
+    - [Où placer son CSS](#où-placer-son-css)
+    - [Les sélecteurs](#les-sélecteurs)
+      - [Sélecteurs d'éléments](#sélecteurs-déléments)
+      - [Sélecteurs de classe](#sélecteurs-de-classe)
+      - [Sélecteurs d'ID](#sélecteurs-did)
+      - [Sélecteurs d'attributs](#sélecteurs-dattributs)
+      - [Pseudos classes et pseudos éléments](#pseudos-classes-et-pseudos-éléments)
+    - [Media queries](#media-queries)
+    - [Bootstrap](#bootstrap)
+  - [Javascript](#javascript)
+    - [Les variables en JS](#les-variables-en-js)
+    - [Closure en JS](#closure-en-js)
+    - [Les manipulations du DOM](#les-manipulations-du-dom)
+    - [JSON](#json)
+  - [Typescript](#typescript)
+  - [Web Frameworks](#web-frameworks)
+  - [Laravel and view controllers](#laravel-and-view-controllers)
+  - [Model Laravel](#model-laravel)
+  - [Controller Model Dependencies (Bonus)](#controller-model-dependencies-bonus)
+
+
 ## HTML
 
 ### Elements sémantiques 
