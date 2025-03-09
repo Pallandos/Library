@@ -27,9 +27,11 @@ Jean CAYLUS
   - [Typescript](#typescript)
     - [Le typage statique et inférence](#le-typage-statique-et-inférence)
     - [Les *generics*](#les-generics)
-  - [Web Frameworks](#web-frameworks)
-  - [Laravel and view controllers](#laravel-and-view-controllers)
-  - [Model Laravel](#model-laravel)
+  - [Web Frameworks with React](#web-frameworks-with-react)
+  - [Model View Controller (MVC)](#model-view-controller-mvc)
+    - [View and Controller](#view-and-controller)
+      - [Les routes](#les-routes)
+      - [Controllers](#controllers)
   - [Controller Model Dependencies (Bonus)](#controller-model-dependencies-bonus)
 
 
@@ -434,10 +436,103 @@ function identity<T = number>(arg: T): T {
 }
 ```
 
-## Web Frameworks
+## Web Frameworks with React
 
-## Laravel and view controllers
+**React** est une biliothèque JS qui est utilisée pour construire des web apps à page unique qui changent souvent de données affichées. 
 
-## Model Laravel
+Il implémente le *Virtual DOM* : c'est un clone du DOM, qui est utilisé pour savoir quels éléments du DOM ont changé, et donc de n'actualiser que ceux là. On gagne en efficacité.
+
+Les *react hooks* sont des composants centraux de React : ils permettent d'ajouter l'état d'un composant sans avoir à re écrire de nouvelles choses. 
+
+Les *react fragments* sont des contenants de plusieurs éléments react. Ils permettent d'accéder à ces éléments sans alourdir le DOM. 
+
+**React**, par son approche déclarative et son *Virtual DOM*, facilite la création de pages dynamiques, maintenables et performantes. La clé est de bien structurer les composants (rôles clairs, découpage raisonnable de l’état), utiliser des mécanismes de mémoïsation et de réconciliation pour éviter des re-rendus superflus, et ainsi parvenir à une application fluide et plus économe en ressources.
+
+## Model View Controller (MVC)
+
+![image mvc](MVC.png)
+
+**MVC** est une architecture utilisée en dev web, centrale. On découle l'apps en 3 principaux composants, chacuns avec un rôle précis.
+
+1. Model
+   - le cadre abstrait, canevas de l'app
+   - gère les BDD et les données du système
+2. View :
+   - génère l'interface user 
+   - représente l'état du model
+3. Controller :
+   - capture les interractions de l'user, les enregistre et les traite
+   - invoque les actions définies par le model 
+   - connait les règles de navigation (espaces acessibles à un moment donné etc)
+
+> Dans le cadre du cours nous utilisons Laravel, un framework MVC pour PHP
+
+### View and Controller
+
+#### Les routes
+
+Les **routes** définissent les liens internes de notre appli. Quand un user demande un lien interne, les routes appliquent leurs règles (connexion etc) et redirigent l'user. 
+
+Les routes peuvent retourner une vue : 
+
+```php
+<?php
+Route::get('/', function () {
+    return view('welcome');
+});
+```
+
+Appeler un contrôleur (avec ou sans argument):
+
+```php
+<?php
+Route::get('/home', [HomeController::class, 'index']);
+
+Route::get('/user/{id}', [UserController::class, 'show']);
+```
+
+Enfin, on code les règles de navigation à l'aide de *middleware* :
+
+```php
+<?php
+Route::get('/dashboard', function () {
+    // Code pour afficher le tableau de bord
+})->middleware('auth');
+```
+
+#### Controllers
+
+Les controllers permettent de gérer le traitement commun des routes, de grouper les middleware etc. On peut les créer rapidement dans Laravel avec la commande suivante : `php  artisan make:controller [MonController] --ressource`.
+
+Le controller généré par défaut : 
+
+```php
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class TaskController extends Controller
+{
+  //
+}
+```
+
+Un exemple simple de controller avec arguments/paramètre :
+
+```php
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    public function show($id)
+    {
+        return "User ID: " . $id;
+    }
+}
+```
 
 ## Controller Model Dependencies (Bonus)
