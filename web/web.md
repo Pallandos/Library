@@ -32,6 +32,10 @@ Jean CAYLUS
     - [View and Controller](#view-and-controller)
       - [Les routes](#les-routes)
       - [Controllers](#controllers)
+      - [Blade](#blade)
+    - [Model](#model)
+      - [Migrations](#migrations)
+      - [Seeding](#seeding)
   - [Controller Model Dependencies (Bonus)](#controller-model-dependencies-bonus)
 
 
@@ -534,5 +538,111 @@ class UserController extends Controller
     }
 }
 ```
+
+#### Blade
+
+**Blade** est un langage de template : on écrit un code à trous. Cela rends le code plus facile à lire qu'en PHP, avec une plus grande capacité de customisation. 
+
+On peut aussi utiliser des directives indiquées par un `@[directive]`, comme `@if`, `@for` etc. 
+
+Il y a aussi un système d'héritage *(mais c'est bresson j'ai pas compris)* avec `@yield` et `@extend`.
+
+### Model
+
+Le **Model** permet de controller tout ce qui se passe dans l'appli. 
+
+On y implémnente aussi les stratégies de chargement : un *lazy loading* sera toujours plus efficace qu'un *eager loading*. Le but est d'éviter de faire des requêtes inutiles.
+
+Le model gère aussi les bases de données. **Eloquent** est l'outil de Laravel qui permet de gérer de manière très efficace les accès en base de donnée etc. Pour chaque table, on créer un model **Eloquent** associé. 
+
+Dans un fichier `config/database.php` on gère les connexions aux database (Mysql etc).
+
+#### Migrations
+
+Une **migration** est un fichier qui permet de gérer un base de donnée : addition ou suppressio nde colone etc. Tout est écrit dans du code pour que les changements soient controlés et précis. Une migration est définie dans deux sens : `up()` et `down()`.
+
+Exemple de migration pour créer un table : 
+
+```php
+<?php
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateUsersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('users');
+    }
+}
+```
+
+#### Seeding
+
+Le **Seeding** est une méthode qui vise à remplir ses bases de données de valeurs afin de tester le comportement de l'application. Pour que ces valeurs soient cohérentes avec l'application ou utilise des *seeders*.
+
+Dans un seeder nous pouvons décrire le comportement voulu des données afin de créer des tables qui correspondent aux cas d'utilisation de notre appli web.
+
+On peut créer des seeders avec la commande artisan : 
+
+```sh
+php artisan make:seeder UsersTableSeeder
+```
+
+Voici à quoi pourrait resembler un seeder pour créer des utilisateurs fictifs : 
+
+```php
+<?php
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+class UsersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('users')->insert([
+            'name' => Str::random(10),
+            'email' => Str::random(10).'@example.com',
+            'password' => Hash::make('password'),
+        ]);
+    }
+}
+```
+
+Après avoit fait son seeder, on peut les lancer pour tester nos applications en condition presque réelle. 
+
 
 ## Controller Model Dependencies (Bonus)
