@@ -25,6 +25,8 @@ Jean CAYLUS
     - [Les manipulations du DOM](#les-manipulations-du-dom)
     - [JSON](#json)
   - [Typescript](#typescript)
+    - [Le typage statique et inférence](#le-typage-statique-et-inférence)
+    - [Les *generics*](#les-generics)
   - [Web Frameworks](#web-frameworks)
   - [Laravel and view controllers](#laravel-and-view-controllers)
   - [Model Laravel](#model-laravel)
@@ -387,6 +389,50 @@ element.addEventListener('click', () => {
 }
 ```
 ## Typescript
+
+**Typecsript** est un sur langage de *Javascript*. En plus du JS, il prends en compte le typage statique, la programmation orientée objet, et des améliorations de producitivité. 
+
+### Le typage statique et inférence
+
+TS gère aussi l'*inférence* de type : c'est le fait de déterminer automatiquement le type d'une variable en fonction de sa valeur.
+
+De même en TS, on a un typage statique : on définit une variable et son type : `let ma_variable: TYPE = valeur`. On ne peut donc plus lui attribuer une autre valeur sous peine d'erreur. Cela facilite la lisibilité, maintenance et robustesse du code. 
+
+### Les *generics*
+
+Les *generics* permettent de créer des composants réutilisables qui fonctionnent avec différents types de données. On ne précise pas le type explicitement. On évite donc la répétition et la maintenabilité du code. 
+
+On écrit des generics avec la syntaxe : `function name<[type]>(arg : [type]){}`
+
+```ts
+function identity<T>(arg: T): T {
+    return arg;
+}
+
+let output1 = identity<string>("Hello");
+let output2 = identity<number>(42);
+```
+
+On peut aussi définir un type par défaut dans un générique :
+
+**Pour conclure** : 
+
+Quand TypeScript est avantageux :
+
+- rojets de moyenne ou grande envergure, où la maintenabilité, la robustesse et la collaboration sont essentielles.
+- Équipes nombreuses, car les types facilitent la communication entre développeurs.
+- Refactorings fréquents : le système de types détecte les erreurs plus tôt.
+
+Cas où JavaScript “pur” est suffisant :
+- Petits scripts, prototypes ou pages statiques sans logique complexe.
+- Environnements très contraints (sans outils de build).
+- Rapidité de mise en place pour un code minimaliste, lorsqu’on préfère la simplicité à la sécurité des types.
+
+```ts
+function identity<T = number>(arg: T): T {
+  return arg;
+}
+```
 
 ## Web Frameworks
 
