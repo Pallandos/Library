@@ -30,15 +30,15 @@ C’est le principe de **l’ingénierie orientée services** (*Service-Oriented
 
 ## 2. Définitions clés
 
-### 🔹 Web Service
+### Web Service
 Un **service web** permet à **deux machines de communiquer** sur un réseau (souvent via HTTP).  
 Il renvoie des **ressources** : JSON, XML, HTML, images, etc.
 
-### 🔹 API (Application Programming Interface)
+### API (Application Programming Interface)
 Une **API** expose des **fonctions et des données** pour permettre à des applications de **communiquer** entre elles.  
 Une **Web API** est donc la **porte d’entrée** d’un service web.
 
-### 🔹 RESTful API
+### RESTful API
 Une **REST API** est une API web qui respecte les **principes REST (Representational State Transfer)** :
 - Basée sur le protocole HTTP  
 - Manipule des **ressources identifiées par des URLs**  
