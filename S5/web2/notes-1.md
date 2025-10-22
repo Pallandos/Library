@@ -1,10 +1,10 @@
-# 🌐 Fiche de Cours – Web Services (Session 1)
-### 🧑‍🏫 Professeur : Raúl Mazo  
-### 📘 Thème : Motivation, Définitions et Services RESTful  
+# Fiche de Cours – Web Services (Session 1)
+### Professeur : Raúl Mazo  
+### Thème : Motivation, Définitions et Services RESTful  
 
 ---
 
-## 🎯 Objectif du cours
+##  Objectif du cours
 Apprendre à **décrire, définir, utiliser et implémenter** des **services web** et **microservices**.
 
 ### Compétences visées
@@ -14,21 +14,21 @@ Apprendre à **décrire, définir, utiliser et implémenter** des **services web
 
 ---
 
-## 🚀 1. Motivation : Pourquoi des Services Web ?
+##  1. Motivation : Pourquoi des Services Web ?
 Exemple : une application de **covoiturage**
 
 Fonctionnalités nécessaires :
-- Authentification 🔑  
-- Paiement 💳  
-- Géolocalisation 📍  
-- Gestion des trajets 🛣️  
+- Authentification   
+- Paiement   
+- Géolocalisation   
+- Gestion des trajets   
 
-➡️ Au lieu de tout développer, on **réutilise des services existants** via leurs **APIs** (ex. Google Maps, PayPal…).  
+Au lieu de tout développer, on **réutilise des services existants** via leurs **APIs** (ex. Google Maps, PayPal…).  
 C’est le principe de **l’ingénierie orientée services** (*Service-Oriented Engineering*).
 
 ---
 
-## 🧠 2. Définitions clés
+## 2. Définitions clés
 
 ### 🔹 Web Service
 Un **service web** permet à **deux machines de communiquer** sur un réseau (souvent via HTTP).  
@@ -46,17 +46,17 @@ Une **REST API** est une API web qui respecte les **principes REST (Representati
 
 ---
 
-## 🧱 3. Architectures logicielles
+##  3. Architectures logicielles
 
 | Type | Description | Avantages | Inconvénients |
 |------|--------------|------------|----------------|
-| 🏗️ Monolithique | Tout le code (UI, logique, DB) dans une seule app | Simple à déployer | Peu flexible, difficile à maintenir |
-| 🧩 SOA | Application divisée en services interconnectés | Réutilisable, modulaire | Complexe et coûteux |
-| ⚙️ Microservices | Petits services autonomes et spécialisés | Scalable, souple | Sécurité et orchestration plus difficiles |
+|  Monolithique | Tout le code (UI, logique, DB) dans une seule app | Simple à déployer | Peu flexible, difficile à maintenir |
+|  SOA | Application divisée en services interconnectés | Réutilisable, modulaire | Complexe et coûteux |
+|  Microservices | Petits services autonomes et spécialisés | Scalable, souple | Sécurité et orchestration plus difficiles |
 
 ---
 
-## ⚙️ 4. Composants d’un Service RESTful
+## 4. Composants d’un Service RESTful
 
 | Composant | Description |
 |------------|-------------|
@@ -69,7 +69,7 @@ Une **REST API** est une API web qui respecte les **principes REST (Representati
 
 ---
 
-## 💻 5. Implémentation d’un Serveur REST en Vanilla JS
+## 5. Implémentation d’un Serveur REST en Vanilla JS
 
 ### Étapes principales
 1. **Créer un serveur HTTP**
