@@ -33,8 +33,8 @@ On considère deux catégories de *temps* en OS embarqué :
 
 Un **noyau préemptif** est un noyau qui peut interrompre une tâche avant qu'elle n'ait fini son exécution pour laisser la place à une autre tâche plus importante. 
 
-| Critère | noyau préemptif | noyau non préemptif |
-| --- | --- | --- | 
+| Critère | préemptif | non préemptif |
+|---|---|---|
 | CPU | La tâche peut être interrompue à tout moment | La tâche possède le CPU jusqu'à la fin de son exécution | 
 | Durée d'exécution | Limitée par un quantum de temps (ou l'ordonanceur) | Peut être très longue | 
 | Réactivité | Bonne dans le pire ces cas | Bonne en moyenne |
