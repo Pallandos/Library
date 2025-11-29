@@ -11,3 +11,4 @@ Bibliothèque de mes cours en CSN
   - [Compilation](S4/compilation/)
 - S5
   - [Web2](S5/web2/main.md)
+  - [OS embarqué](S5/embeded-os/)
