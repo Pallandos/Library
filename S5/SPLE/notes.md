@@ -21,3 +21,36 @@ Les deux étapes pourraient être :
 1. *domain engineering* : dessiner et concevoir le produit de base en analysant le problème. On pose donc les composants réutilisables etc
 2. *application engineering* : on utilise les résultats de l'étape d'avant pour configurer les produits. C'est ici que l'on sort les produits
 
+# Domain Engineering
+
+L'objectif est de capturer et spécifier les exigences non pas pour un seul produit, mais pour toute la famille de produits. On doit donc définir les produits de manière *extensive*, c'est à dire tous les produits de cette famille. 
+
+Les 3 activités principales de cette phase sont :
+
+- Analyse : identifier la variabilité des produits
+- Design : développer l'architecture de base
+- Implémentation : Développer des composants réutilisables
+
+> [!WARNING]
+> Point vocabulaire : on distingue bien **request**, **need** et **requirements**. Le premier est une demande exprimée par le client, le second est un éléments réellement nécessaire au produit et le dernier est une caractéristique stricte, formulée dans le cahier des charges/specs.
+
+Les exigences sont à classer dans 4 catégories selon de modèle *IREB* :
+
+1. *functional - FR* : ce que le système doit faire
+2. *quality - NFR* : ce que le système doit être 
+3. *constraints* : limitations (souvent externes) non négociables (ex une norme ou une loi)
+4. *process requirements* : contraintes sur la manière de concevoir le produit
+
+Pour spécifier le PLE, on utilise un format bien particulier :
+
+```
+[CONDITION] <portée = all | some> <modalité = shall | should | could> <action> <objet>
+```
+
+Par exemple :
+
+```
+In case the 'Find and Replace' feature is activated, Those systems of the text editors product line that support prompts [Scope variable] shall [Priorité] provide the user with the ability to approve [Action] the changes.
+```
+
+Ce genre de documentation est normée, notamment avec la norme *ISO/IEC/IEEE 29148:2011*.
