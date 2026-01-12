@@ -54,3 +54,9 @@ In case the 'Find and Replace' feature is activated, Those systems of the text e
 ```
 
 Ce genre de documentation est normée, notamment avec la norme *ISO/IEC/IEEE 29148:2011*.
+
+## Product Line Models
+
+Définir de manière linéaire tous les produits est impossible en raison de l'explosion combinatoire. On va donc utiliser des graphiques, ou *modèles* pour une représentation intensive et implicite.
+
+On utilise donc en général le [Feature Model (FM)](https://en.wikipedia.org/wiki/Feature_model)
