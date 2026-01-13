@@ -60,3 +60,31 @@ Ce genre de documentation est normée, notamment avec la norme *ISO/IEC/IEEE 291
 Définir de manière linéaire tous les produits est impossible en raison de l'explosion combinatoire. On va donc utiliser des graphiques, ou *modèles* pour une représentation intensive et implicite.
 
 On utilise donc en général le [Feature Model (FM)](https://en.wikipedia.org/wiki/Feature_model)
+
+# Vérification du modèle
+
+Après avoir construit notre modèle, nous devons vérifier qu'il est *bon*. C'est à dire qu'il ne contient pas un des cas suivant :
+
+- *void model* : le cas où on ne peut générer aucune configuration valide
+- *dead feature* : une feature qui ne peut être choisie dans aucune configuration
+- *false optional* : feature optionnelle qui ne peut pas ne pas être prise (elle est en fait obligatoire)
+- *redundancies* : difficile à saisir, c'est une contrainte qui est inutile, l'espace des configurations est le même sans cette contrainte 
+- *unreachable value* : une caractéristique chiffrée qui ne peut pas atteindre toute la plage annoncée
+
+Pour cela, on ne va pas tester les choses à la main mais on va transformer notre modèle en un programme de contraintes formelles, qui sera lisible par un ordinateur. C'est le **model to text**.
+
+Puis, une fois les erreurs identifiées, on va proposer une correction et réparer notre système. 
+
+# En code
+
+En software, on utilise plusieurs techniques pour faire du SPLE, avec des types de **variabilité**.
+
+1. **variabilité négative** : on écrit tout dans la code base et on utilise des flags de compilation pour ne sélecitonner que ce qui est pertinent lors de la compilation
+2. **variabilité positive** : on conçoit des bouts de produits et on les additione au moment de l'assemblage/compilation
+
+# Pour aller plus loin
+
+On distingue aussi :
+
+- configuration = choisir les features pour assembler le produit
+- customisation = on modifie le produit pour s'adapter à des demandes qui ne sont pas dans la ligne de produit
